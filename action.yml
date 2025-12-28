@@ -1,0 +1,10 @@
+name: "GitHub Actions Hashpin Enforcer"
+description: "Fails pull requests if any GitHub Actions workflows use unpinned actions. Only commit SHA pins are allowed."
+author: "gustavtjac"
+branding:
+  icon: "lock"
+  color: "blue"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
