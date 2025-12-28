@@ -17,6 +17,7 @@ function checkWorkflows() {
     let match;
 
     while ((match = regex.exec(content)) !== null) {
+        console.log(match);
       const [, action, ref] = match;
       if (!isPinned(ref)) {
     
@@ -37,6 +38,7 @@ function checkWorkflows() {
         `✅ All GitHub Actions are pinned to commit SHAs.\n` + 
         goodList.join('\n')
     );
+    core
   }
 }
 
