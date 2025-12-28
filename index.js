@@ -3,7 +3,7 @@ const fs = require('fs');
 const glob = require('glob');
 
 function isPinned(ref) {
-  return /^[0-9a-f]{40}$/.test(ref);
+  return /^[0-9a-f]{40}$/i.test(ref);
 }
 
 function checkWorkflows() {
@@ -13,7 +13,7 @@ function checkWorkflows() {
 
   workflowFiles.forEach(file => {
     const content = fs.readFileSync(file, 'utf-8');
-    const regex = /^\s*uses:\s*(.+?)@(.+)$/gm;
+    const regex = /^\s*-\s*uses:\s*(.+?)@(.+?)\s*(#.*)?$/gm;
     let match;
 
     while ((match = regex.exec(content)) !== null) {
