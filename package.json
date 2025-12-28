@@ -1,0 +1,28 @@
+{
+  "name": "hashpinchecker",
+  "version": "1.0.0",
+  "description": "Fails PRs if GitHub Actions workflows use unpinned actions; only commit SHA pins are allowed.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx @vercel/ncc build index.js -o dist"
+  },
+  "keywords": [
+    "github-actions",
+    "hashpin",
+    "security",
+    "workflow",
+    "ci",
+    "enforcer"
+  ],
+  "author": "gustavtjac",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^6.0.0",
+    "glob": "^10.3.3"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.0"
+  }
+}
