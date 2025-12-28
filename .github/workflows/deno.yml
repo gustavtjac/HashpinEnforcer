@@ -11,4 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: gustavtjac/HashpinEnforcer@bf3ff29581b014f936e94e28f3bb6491a02423af
+      - uses: gustavtjac/HashpinEnforcer@551d437789d0a0bfbb6aaf937a6fd1bc5ef82f55
