@@ -9,6 +9,7 @@ function isPinned(ref) {
 function checkWorkflows() {
   const workflowFiles = glob.sync('.github/workflows/*.yml');
   const offenders = [];
+   const goodList = [];
 
   workflowFiles.forEach(file => {
     const content = fs.readFileSync(file, 'utf-8');
@@ -20,6 +21,8 @@ function checkWorkflows() {
       if (!isPinned(ref)) {
     
         offenders.push(`${file}: action "${action}" is not pinned (ref: "${ref}")`);
+      }else{
+        goodList.push(`${file}: action "${action}" is pinned (ref: "${ref}")`)
       }
     }
   });
@@ -30,7 +33,10 @@ function checkWorkflows() {
       offenders.join('\n')
     );
   } else {
-    core.info('✅ All GitHub Actions are pinned to commit SHAs.');
+    core.info(
+        `✅ All GitHub Actions are pinned to commit SHAs.\n` + 
+        goodList.join('\n')
+    );
   }
 }
 

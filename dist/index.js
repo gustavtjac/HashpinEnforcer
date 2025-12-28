@@ -35775,15 +35775,20 @@ function isPinned(ref) {
 function checkWorkflows() {
   const workflowFiles = glob.sync('.github/workflows/*.yml');
   const offenders = [];
+   const goodList = [];
 
   workflowFiles.forEach(file => {
     const content = fs.readFileSync(file, 'utf-8');
     const regex = /^\s*uses:\s*(.+?)@(.+)$/gm;
     let match;
+
     while ((match = regex.exec(content)) !== null) {
       const [, action, ref] = match;
       if (!isPinned(ref)) {
-        offenders.push(`${file}: ${match[0].trim()}`);
+    
+        offenders.push(`${file}: action "${action}" is not pinned (ref: "${ref}")`);
+      }else{
+        goodList.push(`${file}: action "${action}" is pinned (ref: "${ref}")`)
       }
     }
   });
@@ -35794,11 +35799,15 @@ function checkWorkflows() {
       offenders.join('\n')
     );
   } else {
-    core.info('✅ All GitHub Actions are pinned to commit SHAs.');
+    core.info(
+        `✅ All GitHub Actions are pinned to commit SHAs.\n` + 
+        goodList.join('\n')
+    );
   }
 }
 
 checkWorkflows();
+
 module.exports = __webpack_exports__;
 /******/ })()
 ;
